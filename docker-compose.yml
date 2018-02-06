@@ -1,0 +1,26 @@
+apache:
+  build: apache
+  container_name: ubuntu
+  ports:
+    - "6000:80"
+  tty: true
+  links:
+    - db:db
+  volumes:
+    - ./data:/var/www/api.hackaton
+db:
+  build: mysql
+  container_name: mysql
+  ports:
+      - "3306"
+meteor:
+  build: meteor
+  container_name: meteor
+  ports:
+    - "80:8080"
+  links:
+    - apache:apache
+  environment:
+      MONGO_URL: mongodb://mongo
+mongo:
+  image: mongo:latest
