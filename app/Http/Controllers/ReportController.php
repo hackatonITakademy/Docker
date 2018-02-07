@@ -62,7 +62,7 @@ class ReportController extends Controller
 
         $report->save();
 
-        if ($request->user()->id !== null) {
+        if ($request->user() !== null) {
             $report->users()->attach($request->user()->id);
         }
 
@@ -85,7 +85,7 @@ class ReportController extends Controller
             $report->users()->attach($request->user()->id);
         }
 
-        ProcessReport::dispatch($report)->delay(now()->addSeconds(10));
+        ProcessReport::dispatch($report);
         // todo create the report
         // $report->filename('test')
 
