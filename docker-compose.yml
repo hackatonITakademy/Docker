@@ -6,6 +6,7 @@ apache:
   tty: true
   links:
     - db:db
+    - redis:redis
   volumes:
     - ./data:/var/www/api.hackaton
 db:
@@ -24,3 +25,8 @@ meteor:
       MONGO_URL: mongodb://mongo
 mongo:
   image: mongo:latest
+redis:
+  restart: always
+  image: sameersbn/redis:latest
+  environment:
+      REDIS_PORT: 6379
