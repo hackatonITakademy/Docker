@@ -32,7 +32,7 @@ class ReportController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'git_repository' => 'max:191|url',
-            'user_id' => 'integer|nullable',
+            'email' => 'email|required',
         ]);
 
         if ($validator->fails()) {
@@ -57,7 +57,7 @@ class ReportController extends Controller
 //            dd($e->getMessage());
 //        }
 //        \Storage::disk('local')->put('file.txt', 'Content idk lol mdr');
-        // todo create the report
+        // todo create the report get the mail with $request->mail
         ProcessReport::dispatch($report);
 
         $report->save();
